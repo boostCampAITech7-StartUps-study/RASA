@@ -6,7 +6,7 @@
 
 ## Branch naming rule
 - main branch 수정은 README.md만 가능합니다.
-- 사용할 수 있는 브렌치 명은 다음 4개로 제안합니다.  'develop' / 'exp' / 'feat' / 'fix'
+- 사용할 수 있는 브렌치 명은 다음 4개로 제한합니다.  'develop' / 'exp' / 'feat' / 'fix'
 - 모든 작업은 develop을 기준으로 최종 병합됩니다. 따라서 develop에 바로 코드를 작성하지 않습니다.
 - 필요한 기능은 feat / 본격적인 개발은 exp를 앞에 붙여 명명해주시면 됩니다.
 - fix 는 버그 수정에 사용하며, 사용 후 가급적 제거해주세요!
