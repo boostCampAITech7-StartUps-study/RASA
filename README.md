@@ -1,5 +1,6 @@
 # RASA
 **Naver Boostcamp AI Tech 7기 - 창업 스터디 팀**
+
 안녕하세요! 이번 프로젝트(Recommend Application for Study Room, RASA)를 위해 repo.를 만들었습니다! 
 작업할 때 다음과 같은 규칙에 유의하여 진행해주시길 부탁드립니다.
 
