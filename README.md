@@ -1,2 +1,6 @@
 # RASA
-Recommend Application for Study-Room
+**Naver Boostcamp AI Tech 7기 - 창업 스터디 팀**
+
+* 공부할 때 어디서 모일지 매번 고민했던 경험
+* 사용자 위치 기반으로, 모임 위치를 추천해주는 Slack bot 개발
+* 추천된 위치의 스터디 카페 등 학습 공간, 근처 식당을 추천하는 기능 개발
