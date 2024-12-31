@@ -184,8 +184,8 @@ def search_and_scrape(query):
 def main():
     # 검색할 역 이름 목록
     stations = [
-        # "홍대", "합정", "상수", "연남" 
-        # "신촌", "이대", "아현", "연희"
+        # "홍대", "합정", "상수", 
+        # "신촌", "이대", "아현", 
         # "명동역", "을지로", "동대문역" 
         # "영등포", "여의도", "당산", "문래" 
         # "송파", "잠실", "관악", "신림", "서울대입구" 
@@ -194,7 +194,7 @@ def main():
     # 전체 결과 저장할 리스트
     # all_results = []
     for station in stations:
-        query = f"{station} 스터디룸"
+        query = f"{station}역 스터디룸"
         print(f"\n--- '{query}' 검색 시작 ---")
         
         # 크롤링 실행
