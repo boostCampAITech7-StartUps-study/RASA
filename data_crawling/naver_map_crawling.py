@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import time
 import csv
 from datetime import datetime
+import re
 import random
 rd = random.uniform(1,2)
 
@@ -57,7 +58,7 @@ def crawl_detail(soup):
         subway = subway.get_text(separator=' ', strip=True) if subway else '역정보 없음'
         
         call = soup.select_one('span.xlx7Q')
-        call = call.text if call else '가격정보 없음'
+        call = call.text if call else '번호정보 없음'
 
         price = soup.select_one('ul.Jp8E6.a0hWz')
         price = price.text if price else '가격정보 없음'
@@ -68,18 +69,25 @@ def crawl_detail(soup):
         note = soup.select_one('div.xPvPE')
         note = note.text if note else '비고 없음'
         
-        reviews = soup.select('div.dAsGb')
-        # 방문자 리뷰 추출
-        visitor_review = next(
-            (item.text.strip() for item in reviews if '방문자 리뷰' in item.text), 
-            '방문자 리뷰 없음'
-        )
-
-        # 블로그 리뷰 추출
-        blog_review = next(
-            (item.text.strip() for item in reviews if '블로그 리뷰' in item.text), 
-            '블로그 리뷰 없음'
-        )
+        reviews = soup.select_one('div.dAsGb')
+        if reviews:
+            review_text = reviews.text.strip()
+            
+            # 별점 추출
+            star_match = re.search(r'별점(\d+)', review_text)
+            star = star_match.group(1) if star_match else '별점 정보 없음'
+            
+            # 방문자 리뷰 수 추출
+            visitor_match = re.search(r'방문자 리뷰 (\d+)', review_text)
+            visitor_review = visitor_match.group(1) if visitor_match else '방문자 리뷰 없음'
+            
+            # 블로그 리뷰 수 추출
+            blog_match = re.search(r'블로그 리뷰 (\d+)', review_text)
+            blog_review = blog_match.group(1) if blog_match else '블로그 리뷰 없음'
+        else:
+            star = '별점 정보 없음'
+            visitor_review = '방문자 리뷰 없음'
+            blog_review = '블로그 리뷰 없음'
         
         # grade = soup.select_one('ul.K4J9r')
         # grade = grade.text if grade else '평가정보 없음'
@@ -94,6 +102,7 @@ def crawl_detail(soup):
             'note': note,
             'visitor_review': visitor_review,
             'blog_review': blog_review,
+            'star': star,
             # 'grade': grade,
         }
     except Exception as e:
@@ -188,7 +197,16 @@ def main():
         # "신촌", "이대", "아현", 
         # "명동역", "을지로", "동대문역" 
         # "영등포", "여의도", "당산", "문래" 
-        # "송파", "잠실", "관악", "신림", "서울대입구" 
+        # "송파", "잠실"
+        # "관악", "신림", "서울대입구" 
+        # "강남", "역삼", "선릉", "삼성", 
+        # "서초", "방배",
+        # "성수", "왕십리", "서울숲",
+        # "건대입구", "구의", "군자", 
+        # "종로", "광화문역", "혜화역",
+        # "용산", "이태원", "노량진"
+        # "성북구", "성신여대", "안암",
+        #  "동대문구", "청량리", "회기"
     ]
     
     # 전체 결과 저장할 리스트
